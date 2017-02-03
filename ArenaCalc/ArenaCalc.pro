@@ -6,18 +6,25 @@
 
 QT       += core gui
 
+CONFIG   += c++11 stl hide_symbols
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ArenaCalc
 TEMPLATE = app
 
+DEFINES += QT_NO_CAST_FROM_ASCII \
+           QT_NO_CAST_TO_ASCII
+
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    randomdialog.cpp
+    randomdialog.cpp \
+    randomholder.cpp
 
 HEADERS  += mainwindow.h \
-    randomdialog.h
+    randomdialog.h \
+    randomholder.h
 
 FORMS    += mainwindow.ui \
     randomdialog.ui

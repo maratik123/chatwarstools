@@ -2,6 +2,9 @@
 #define RANDOMDIALOG_H
 
 #include <QDialog>
+#include <random>
+
+class QLineEdit;
 
 namespace Ui {
 class RandomDialog;
@@ -21,6 +24,9 @@ public slots:
 
 private:
     Ui::RandomDialog *ui;
+    std::uniform_int_distribution<> uid;
+
+    void putMsg(QLineEdit *placeToPut, const QString &message);
 };
 
 #endif // RANDOMDIALOG_H
