@@ -24,7 +24,7 @@ public slots:
 
 private:
     Ui::RandomDialog *ui;
-    std::uniform_int_distribution<> uid;
+    std::uniform_int_distribution<std::size_t> uid;
 
     void putMsg(QLineEdit *placeToPut, const QString &message);
 };

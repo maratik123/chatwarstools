@@ -16,8 +16,8 @@ public:
 
 private:
     RandomHolder();
+    std::seed_seq seq;
     MainEngineType _mainEngine;
-    std::random_device randomDevice;
 };
 
 #endif // RANDOMHOLDER_H

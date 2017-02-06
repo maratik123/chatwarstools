@@ -1,9 +1,14 @@
 #include "randomholder.h"
 
+#include <chrono>
+
 RandomHolder::RandomHolder() :
-    _mainEngine(randomDevice())
-{
-}
+    seq({
+        static_cast<long>(std::random_device()()),
+        std::chrono::system_clock::now().time_since_epoch().count()
+        }),
+    _mainEngine(seq)
+{}
 
 RandomHolder &RandomHolder::getInstance()
 {

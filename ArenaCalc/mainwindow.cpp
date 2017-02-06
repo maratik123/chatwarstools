@@ -15,7 +15,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::showRandomDialog() {
+void MainWindow::showRandomDialog()
+{
     RandomDialog *randomDialog = new RandomDialog(this);
     randomDialog->show();
 }

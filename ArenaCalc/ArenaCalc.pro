@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-CONFIG   += c++11 stl hide_symbols
+CONFIG   += c++11 stl hide_symbols exceptions
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,13 +18,16 @@ DEFINES += QT_NO_CAST_FROM_ASCII \
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
     randomdialog.cpp \
-    randomholder.cpp
+    randomholder.cpp \
+    commonstringholder.cpp
 
 HEADERS  += mainwindow.h \
     randomdialog.h \
-    randomholder.h
+    randomholder.h \
+    commonstringholder.h \
+    enumclassutil.h
 
 FORMS    += mainwindow.ui \
     randomdialog.ui
