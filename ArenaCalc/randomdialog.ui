@@ -19,14 +19,14 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QLineEdit" name="defenceLineEdit">
+        <widget class="QLineEdit" name="attackLineEdit">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="attackLineEdit">
+        <widget class="QLineEdit" name="defenceLineEdit">
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -64,7 +64,7 @@
    <sender>generatePushButton</sender>
    <signal>clicked()</signal>
    <receiver>RandomDialog</receiver>
-   <slot>attackPressed()</slot>
+   <slot>generatePressed()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>117</x>
@@ -76,25 +76,8 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>generatePushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>RandomDialog</receiver>
-   <slot>defencePressed()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>301</x>
-     <y>276</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>263</x>
-     <y>144</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
  <slots>
-  <slot>attackPressed()</slot>
-  <slot>defencePressed()</slot>
+  <slot>generatePressed()</slot>
  </slots>
 </ui>

@@ -18,6 +18,7 @@ RandomDialog::RandomDialog(QWidget *parent) :
     uid(enumToId(PrivateParts::HEAD), enumToId(PrivateParts::LEGS))
 {
     ui->setupUi(this);
+    updateForm();
 }
 
 RandomDialog::~RandomDialog()
@@ -25,12 +26,12 @@ RandomDialog::~RandomDialog()
     delete ui;
 }
 
-void RandomDialog::attackPressed()
+void RandomDialog::updateAttack()
 {
     putMsg(ui->attackLineEdit, commonStringHolder(StringID::ATTACK));
 }
 
-void RandomDialog::defencePressed()
+void RandomDialog::updateDefence()
 {
     putMsg(ui->defenceLineEdit, commonStringHolder(StringID::DEFENCE));
 }
@@ -39,4 +40,13 @@ void RandomDialog::putMsg(QLineEdit *placeToPut, const QString &message)
 {
     auto value = uid(RandomHolder::getInstance().mainEngine());
     placeToPut->setText(message.arg(commonStringHolder(idToEnum<StringID>(value))));
+}
+
+void RandomDialog::updateForm() {
+    updateAttack();
+    updateDefence();
+}
+
+void RandomDialog::generatePressed() {
+    updateForm();
 }

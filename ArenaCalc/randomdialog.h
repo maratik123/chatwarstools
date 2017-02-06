@@ -19,14 +19,16 @@ public:
     ~RandomDialog();
 
 public slots:
-    void attackPressed();
-    void defencePressed();
+    void generatePressed();
 
 private:
     Ui::RandomDialog *ui;
     std::uniform_int_distribution<std::size_t> uid;
 
     void putMsg(QLineEdit *placeToPut, const QString &message);
+    void updateForm();
+    void updateAttack();
+    void updateDefence();
 };
 
 #endif // RANDOMDIALOG_H
