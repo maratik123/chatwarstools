@@ -2,22 +2,29 @@
 #define ENUMCLASSUTIL_H
 
 #include <cstddef>
+#include <functional>
 
 template <typename T>
-inline constexpr std::size_t enumToId(T t)
+inline constexpr int enumToId(T t)
 {
-    return static_cast<std::size_t>(t);
+    return static_cast<int>(t);
 }
 
 template <typename T>
-inline constexpr T idToEnum(std::size_t id)
+inline constexpr T idToEnum(int id)
 {
     return static_cast<T>(id);
 }
 
+template <typename T1, typename T2>
+inline constexpr T1 enumToEnum(T2 t)
+{
+    return static_cast<T1>(t);
+}
+
 struct EnumClassHash {
     template <typename T>
-    constexpr std::size_t operator()(T t) const { return enumToId(t); }
+    constexpr std::size_t operator()(T t) const { return static_cast<std::size_t>(t); }
 };
 
 #endif // ENUMCLASSUTIL_H

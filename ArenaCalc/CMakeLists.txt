@@ -33,6 +33,7 @@ set(SOURCES
     randomdialog.cpp
     randomholder.cpp
     commonstringholder.cpp
+    enumclassutil.h
 )
 
 set(UI_SOURCES

@@ -2,20 +2,13 @@
 #include "ui_randomdialog.h"
 
 #include "randomholder.h"
-#include "commonstringholder.h"
-
-namespace {
-enum class PrivateParts {
-    HEAD = enumToId(StringID::HEAD),
-    CHEST = enumToId(StringID::CHEST),
-    LEGS = enumToId(StringID::LEGS)
-};
-}
 
 RandomDialog::RandomDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RandomDialog),
-    uid(enumToId(PrivateParts::HEAD), enumToId(PrivateParts::LEGS))
+    uid(enumToId(PrivateParts::HEAD), enumToId(PrivateParts::LEGS)),
+    curAttack(PrivateParts::UNKNOWN),
+    curDefence(PrivateParts::UNKNOWN)
 {
     ui->setupUi(this);
     updateForm();
@@ -28,25 +21,34 @@ RandomDialog::~RandomDialog()
 
 void RandomDialog::updateAttack()
 {
-    putMsg(ui->attackLineEdit, commonStringHolder(StringID::ATTACK));
+    putMsg(curAttack, ui->attackLineEdit, ui->attackDistinctCheckBox->isChecked(), commonStringHolder(StringID::ATTACK));
 }
 
 void RandomDialog::updateDefence()
 {
-    putMsg(ui->defenceLineEdit, commonStringHolder(StringID::DEFENCE));
+    putMsg(curDefence, ui->defenceLineEdit, ui->defenceDistinctCheckBox->isChecked(), commonStringHolder(StringID::DEFENCE));
 }
 
-void RandomDialog::putMsg(QLineEdit *placeToPut, const QString &message)
+void RandomDialog::putMsg(PrivateParts &curPart, QLineEdit *placeToPut, bool distinct, const QString &message)
 {
-    auto value = uid(RandomHolder::getInstance().mainEngine());
-    placeToPut->setText(message.arg(commonStringHolder(idToEnum<StringID>(value))));
+    PrivateParts oldValue = curPart;
+    PrivateParts newValue;
+    do {
+        newValue = idToEnum<PrivateParts>(uid(RandomHolder::getInstance().mainEngine()));
+    } while (distinct && newValue == oldValue);
+
+    curPart = newValue;
+
+    placeToPut->setText(message.arg(commonStringHolder(enumToEnum<StringID>(newValue))));
 }
 
-void RandomDialog::updateForm() {
+void RandomDialog::updateForm()
+{
     updateAttack();
     updateDefence();
 }
 
-void RandomDialog::generatePressed() {
+void RandomDialog::generatePressed()
+{
     updateForm();
 }

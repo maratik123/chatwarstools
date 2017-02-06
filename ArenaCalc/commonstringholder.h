@@ -7,7 +7,7 @@
 
 enum class StringID
 {
-    ATTACK, DEFENCE, HEAD, CHEST, LEGS
+    UNKNOWN, ATTACK, DEFENCE, HEAD, CHEST, LEGS
 };
 
 class CommonStringHolder
