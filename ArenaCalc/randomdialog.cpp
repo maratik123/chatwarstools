@@ -33,8 +33,9 @@ void RandomDialog::putMsg(PrivateParts &curPart, QLineEdit *placeToPut, bool dis
 {
     PrivateParts oldValue = curPart;
     PrivateParts newValue;
+    auto &engine = RandomHolder::getInstance().mainEngine();
     do {
-        newValue = idToEnum<PrivateParts>(uid(RandomHolder::getInstance().mainEngine()));
+        newValue = idToEnum<PrivateParts>(uid(engine));
     } while (distinct && newValue == oldValue);
 
     curPart = newValue;
