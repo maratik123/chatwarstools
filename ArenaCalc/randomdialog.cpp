@@ -53,3 +53,15 @@ void RandomDialog::generatePressed()
 {
     updateForm();
 }
+
+void RandomDialog::changeEvent(QEvent *event)
+{
+    switch (event->type()) {
+    case QEvent::LanguageChange:
+        ui->retranslateUi(this);
+        break;
+    default:
+        QDialog::changeEvent(event);
+        break;
+    }
+}

@@ -20,7 +20,7 @@ public:
     CommonStringHolder(const CommonStringHolder&) = delete;
     void operator=(const CommonStringHolder&) = delete;
 
-    QString get(StringID stringId) const { return tr(stash.at(stringId)); }
+    QString get(StringID stringId) const;
 
 private:
     CommonStringHolder();

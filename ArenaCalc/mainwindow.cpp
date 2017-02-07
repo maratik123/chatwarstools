@@ -20,3 +20,15 @@ void MainWindow::showRandomDialog()
     RandomDialog *randomDialog = new RandomDialog(this);
     randomDialog->show();
 }
+
+void MainWindow::changeEvent(QEvent *event)
+{
+    switch(event->type()) {
+    case QEvent::LanguageChange:
+        ui->retranslateUi(this);
+        break;
+    default:
+        QMainWindow::changeEvent(event);
+        break;
+    }
+}

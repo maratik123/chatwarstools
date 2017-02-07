@@ -15,3 +15,8 @@ const CommonStringHolder& CommonStringHolder::getInstance()
     static CommonStringHolder instance;
     return instance;
 }
+
+QString CommonStringHolder::get(StringID stringId) const
+{
+    return tr(stash.at(stringId));
+}

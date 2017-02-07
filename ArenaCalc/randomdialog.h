@@ -30,6 +30,9 @@ public:
 public slots:
     void generatePressed();
 
+protected:
+    void changeEvent(QEvent *event);
+
 private:
     Ui::RandomDialog *ui;
     std::uniform_int_distribution<int> uid;
