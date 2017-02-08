@@ -22,7 +22,7 @@ add_definitions(
     -DQT_NO_CAST_FROM_BYTEARRAY
 )
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 
 set(QT5_LIBRARIES Qt5::Widgets)
 
@@ -33,7 +33,6 @@ set(SOURCES
     mainwindow.cpp
     randomdialog.cpp
     randomholder.cpp
-    commonstringholder.cpp
     enumclassutil.h
 )
 
@@ -42,8 +41,28 @@ set(UI_SOURCES
     randomdialog.ui
 )
 
+set(TRANSLATIONS
+    ArenaCalc_en.ts
+    ArenaCalc_ru.ts
+)
+
+set(TRANSLATIONS_QRC
+    translations.qrc
+)
+
+set(FILES_TO_TRANSLATE
+    ${SOURCES}
+    ${UI_SOURCES}
+)
+
+configure_file(${TRANSLATIONS_QRC} ${TRANSLATIONS_QRC} COPYONLY)
+
+qt5_add_translation(QM ${TRANSLATIONS})
+
+qt5_add_resources(QM_RC ${CMAKE_BINARY_DIR}/${TRANSLATIONS_QRC})
+
 qt5_wrap_ui(UI_GENERATED_HEADERS ${UI_SOURCES})
 
-add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS})
+add_executable(${TARGET} ${SOURCES} ${UI_GENERATED_HEADERS} ${QM_RC})
 
 target_link_libraries(${TARGET} ${QT5_LIBRARIES})

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>ArenaCalc_en.qm</file>
+        <file>ArenaCalc_ru.qm</file>
+    </qresource>
+</RCC>

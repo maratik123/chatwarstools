@@ -23,20 +23,27 @@
      <height>30</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_File">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="action_Quit"/>
+    <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menu_Tools">
+   <widget class="QMenu" name="menuTools">
     <property name="title">
      <string>&amp;Tools</string>
     </property>
-    <addaction name="action_Random"/>
+    <widget class="QMenu" name="menuLanguage">
+     <property name="title">
+      <string>&amp;Language</string>
+     </property>
+    </widget>
+    <addaction name="actionRandom"/>
+    <addaction name="separator"/>
+    <addaction name="menuLanguage"/>
    </widget>
-   <addaction name="menu_File"/>
-   <addaction name="menu_Tools"/>
+   <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -47,7 +54,7 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="action_Quit">
+  <action name="actionQuit">
    <property name="text">
     <string>&amp;Quit</string>
    </property>
@@ -55,7 +62,7 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="action_Random">
+  <action name="actionRandom">
    <property name="text">
     <string>&amp;Random</string>
    </property>
@@ -68,7 +75,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>action_Quit</sender>
+   <sender>actionQuit</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
@@ -84,7 +91,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>action_Random</sender>
+   <sender>actionRandom</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>showRandomDialog()</slot>

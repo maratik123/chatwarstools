@@ -2,7 +2,6 @@
 #define ENUMCLASSUTIL_H
 
 #include <cstddef>
-#include <functional>
 
 template <typename T>
 inline constexpr int enumToId(T t)

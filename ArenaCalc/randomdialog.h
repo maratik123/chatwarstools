@@ -3,8 +3,7 @@
 
 #include <QDialog>
 #include <random>
-
-#include "commonstringholder.h"
+#include <utility>
 
 class QLineEdit;
 
@@ -13,10 +12,10 @@ class RandomDialog;
 }
 
 enum class PrivateParts {
-    UNKNOWN = enumToId(StringID::UNKNOWN),
-    HEAD = enumToId(StringID::HEAD),
-    CHEST = enumToId(StringID::CHEST),
-    LEGS = enumToId(StringID::LEGS)
+    UNKNOWN = -1,
+    HEAD = 0,
+    CHEST = 1,
+    LEGS = 2
 };
 
 class RandomDialog : public QDialog
@@ -39,10 +38,12 @@ private:
     PrivateParts curAttack;
     PrivateParts curDefence;
 
-    void putMsg(PrivateParts& curPart, QLineEdit *placeToPut, bool distinct, const QString &message);
+    PrivateParts calcNewValue(PrivateParts oldValue, bool distinct);
     void updateForm();
-    void updateAttack();
-    void updateDefence();
+    void updateAttackValue();
+    void updateAttackMsg();
+    void updateDefenceValue();
+    void updateDefenceMsg();
 };
 
 #endif // RANDOMDIALOG_H
