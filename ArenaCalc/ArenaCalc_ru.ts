@@ -70,23 +70,23 @@
     <message>
         <location filename="randomdialog.cpp" line="58"/>
         <source>Attack %1</source>
-        <translation>Атаковать %1</translation>
+        <translation>Атака %1</translation>
     </message>
     <message>
         <location filename="randomdialog.cpp" line="63"/>
         <source>Defence %1</source>
-        <translation>Защищать %1</translation>
+        <translation>Защита %1</translation>
     </message>
 </context>
 <context>
     <name>RandomDialogAttack</name>
     <message>
         <source>head</source>
-        <translation>по голове</translation>
+        <translation>в голову</translation>
     </message>
     <message>
         <source>chest</source>
-        <translation>по груди</translation>
+        <translation>по корпусу</translation>
     </message>
     <message>
         <source>legs</source>
@@ -97,15 +97,15 @@
     <name>RandomDialogDefence</name>
     <message>
         <source>head</source>
-        <translation>голову</translation>
+        <translation>головы</translation>
     </message>
     <message>
         <source>chest</source>
-        <translation>грудь</translation>
+        <translation>корпуса</translation>
     </message>
     <message>
         <source>legs</source>
-        <translation>ноги</translation>
+        <translation>ног</translation>
     </message>
 </context>
 </TS>
