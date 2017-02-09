@@ -46,13 +46,17 @@ void MainWindow::createLanguageMenu()
         if (locale == systemLanguage) {
             action->setChecked(true);
             actionChecked = true;
-        } else if (!actionChecked && locale == defaultLocale) {
+        } else if (!actionChecked && defaultAction == nullptr && locale == defaultLocale) {
             defaultAction = action;
         }
     }
 
-    if (!actionChecked && defaultAction != nullptr) {
-        defaultAction->setChecked(true);
+    if (!actionChecked) {
+        if (defaultAction != nullptr) {
+            defaultAction->setChecked(true);
+        } else {
+            languageActionGroup->actions().constFirst()->setChecked(true);
+        }
     }
 
     connect(languageActionGroup, &QActionGroup::triggered, this, &MainWindow::switchLanguage);
