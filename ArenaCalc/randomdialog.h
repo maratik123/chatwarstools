@@ -31,6 +31,7 @@ public slots:
 
 protected:
     void changeEvent(QEvent *event);
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::RandomDialog *ui;

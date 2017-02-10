@@ -16,15 +16,16 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    static void setGlobalTranslation(const QLocale &locale, bool sendSignal = true);
+    static void setGlobalTranslation(const QString &strLocale, bool sendSignal = true);
     ~MainWindow();
+    static QString savedLocale();
 
     static QTranslator qtTranslator;
     static QTranslator arenaCalcTranslator;
 
-
 protected:
     void changeEvent(QEvent *event);
+    void closeEvent(QCloseEvent *event);
 
 public slots:
     void showRandomDialog();

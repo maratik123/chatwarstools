@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QTranslator>
 #include <QLibraryInfo>
+#include <QSettings>
 
 namespace {
 const QString &translationsPath = QStringLiteral(":/translations");
@@ -15,7 +16,34 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     createLanguageMenu();
+
+    QSettings settings;
+    settings.beginGroup(objectName());
+    restoreGeometry(settings.value(QStringLiteral("geometry")).toByteArray());
+    restoreState(settings.value(QStringLiteral("windowState")).toByteArray());
+    settings.endGroup();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QSettings settings;
+    settings.beginGroup(objectName());
+    settings.setValue(QStringLiteral("geometry"), saveGeometry());
+    settings.setValue(QStringLiteral("windowState"), saveState());
+    settings.endGroup();
+    for(RandomDialog *rndDlg : findChildren<RandomDialog *>(QString(), Qt::FindDirectChildrenOnly)) {
+        rndDlg->close();
+    }
+    QMainWindow::closeEvent(event);
+}
+
+QString MainWindow::savedLocale()
+{
+    QSettings settings;
+    settings.beginGroup(QStringLiteral("translation"));
+    return settings.value(QStringLiteral("locale"), QLocale::system().name().left(2)).toString();
 }
 
 void MainWindow::createLanguageMenu()
@@ -25,31 +53,35 @@ void MainWindow::createLanguageMenu()
     QDir qmDir(translationsPath);
     const QStringList &fileNames = qmDir.entryList(QStringList(QStringLiteral("ArenaCalc_*.qm")));
     const QString &actionString = QStringLiteral("%1 %2");
-    const QString &systemLanguage = QLocale::system().name().left(2);
+    const QString &preferredLocale = savedLocale();
     const QLatin1String defaultLocale("en");
     QAction *defaultAction = nullptr;
     bool actionChecked = false;
-    for (int i = 0; i < fileNames.size(); ++i) {
-        QString locale(fileNames[i]);
+    int i = 1;
+    for (const QString &fileName : fileNames) {
+        QString locale(fileName);
         locale.remove(0, locale.indexOf(QLatin1Char('_')) + 1).chop(3);
         QTranslator translator;
-        translator.load(fileNames[i], qmDir.absolutePath());
+        translator.load(fileName, qmDir.absolutePath());
         const QString &language = translator.translate("MainWindow", "English");
 
-        QAction *action = new QAction(actionString.arg(i + 1).arg(language), this);
+        QAction *action = new QAction(actionString.arg(i).arg(language), this);
+        ++i;
         action->setCheckable(true);
         action->setData(locale);
 
         ui->menuLanguage->addAction(action);
         languageActionGroup->addAction(action);
 
-        if (locale == systemLanguage) {
+        if (locale == preferredLocale) {
             action->setChecked(true);
             actionChecked = true;
         } else if (!actionChecked && defaultAction == nullptr && locale == defaultLocale) {
             defaultAction = action;
         }
     }
+
+    connect(languageActionGroup, &QActionGroup::triggered, this, &MainWindow::switchLanguage);
 
     if (!actionChecked) {
         if (defaultAction != nullptr) {
@@ -58,16 +90,15 @@ void MainWindow::createLanguageMenu()
             languageActionGroup->actions().constFirst()->setChecked(true);
         }
     }
-
-    connect(languageActionGroup, &QActionGroup::triggered, this, &MainWindow::switchLanguage);
 }
 
 QTranslator MainWindow::qtTranslator;
 QTranslator MainWindow::arenaCalcTranslator;
 
-void MainWindow::setGlobalTranslation(const QLocale &locale, bool sendSignal)
+void MainWindow::setGlobalTranslation(const QString &strLocale, bool sendSignal)
 {
     const QString &underscore = QStringLiteral("_");
+    QLocale locale(strLocale);
     qtTranslator.load(locale, QStringLiteral("qt"),  underscore, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     arenaCalcTranslator.load(locale, QStringLiteral("ArenaCalc"), underscore, translationsPath);
 
@@ -78,7 +109,12 @@ void MainWindow::setGlobalTranslation(const QLocale &locale, bool sendSignal)
 
 void MainWindow::switchLanguage(QAction *action)
 {
-    setGlobalTranslation(QLocale(action->data().toString()));
+    const QString &strLocale = action->data().toString();
+    setGlobalTranslation(strLocale);
+    QSettings settings;
+    settings.beginGroup(QStringLiteral("translation"));
+    settings.setValue(QStringLiteral("locale"), strLocale);
+    settings.endGroup();
 }
 
 MainWindow::~MainWindow()
@@ -94,12 +130,8 @@ void MainWindow::showRandomDialog()
 
 void MainWindow::changeEvent(QEvent *event)
 {
-    switch(event->type()) {
-    case QEvent::LanguageChange:
+    if (event->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
-        break;
-    default:
-        QMainWindow::changeEvent(event);
-        break;
     }
+    QMainWindow::changeEvent(event);
 }

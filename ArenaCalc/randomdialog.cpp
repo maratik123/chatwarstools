@@ -4,6 +4,7 @@
 #include "randomholder.h"
 #include "enumclassutil.h"
 #include <array>
+#include <QSettings>
 
 namespace {
 const char* attackScope = "RandomDialogAttack";
@@ -34,8 +35,23 @@ RandomDialog::RandomDialog(QWidget *parent) :
     curDefence(PrivateParts::UNKNOWN)
 {
     ui->setupUi(this);
-    Qt::WindowFlags flags(windowFlags());
+    setAttribute(Qt::WA_DeleteOnClose);
+
+    QSettings settings;
+    settings.beginGroup(objectName());
+    restoreGeometry(settings.value(QStringLiteral("geometry")).toByteArray());
+    settings.endGroup();
+
     updateForm();
+}
+
+void RandomDialog::closeEvent(QCloseEvent *event)
+{
+    QSettings settings;
+    settings.beginGroup(objectName());
+    settings.setValue(QStringLiteral("geometry"), saveGeometry());
+    settings.endGroup();
+    QDialog::closeEvent(event);
 }
 
 RandomDialog::~RandomDialog()
@@ -89,14 +105,10 @@ void RandomDialog::generatePressed()
 
 void RandomDialog::changeEvent(QEvent *event)
 {
-    switch (event->type()) {
-    case QEvent::LanguageChange:
+    if (event->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
         updateAttackMsg();
         updateDefenceMsg();
-        break;
-    default:
-        QDialog::changeEvent(event);
-        break;
     }
+    QDialog::changeEvent(event);
 }
