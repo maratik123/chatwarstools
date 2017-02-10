@@ -35,6 +35,8 @@ set(SOURCES
     randomholder.cpp
     enumclassutil.h
     gamedialog.cpp
+    cpugamer.cpp
+    tripletreenode.cpp
 )
 
 set(UI_SOURCES
