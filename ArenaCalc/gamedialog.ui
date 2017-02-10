@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GameDialog</class>
+ <widget class="QDialog" name="GameDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>386</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Game With Computer</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QTextEdit" name="outputTextEdit"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QGroupBox" name="attackGroupBox">
+       <property name="title">
+        <string>Attack</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="attackHeadPushButton">
+          <property name="text">
+           <string comment="attack">head</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="attackChestPushButton">
+          <property name="text">
+           <string comment="attack">chest</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="attackLegsPushButton">
+          <property name="text">
+           <string comment="attack">legs</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>Defence</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="defenceHeadPushButton">
+          <property name="text">
+           <string comment="defence">head</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="defenceChestPushButton">
+          <property name="text">
+           <string comment="defence">chest</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="defenceLegsPushButton">
+          <property name="text">
+           <string comment="defence">legs</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="peekMovesCheckBox">
+     <property name="text">
+      <string>Peek moves</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

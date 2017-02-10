@@ -34,11 +34,13 @@ set(SOURCES
     randomdialog.cpp
     randomholder.cpp
     enumclassutil.h
+    gamedialog.cpp
 )
 
 set(UI_SOURCES
     mainwindow.ui
     randomdialog.ui
+    gamedialog.ui
 )
 
 set(TRANSLATIONS
