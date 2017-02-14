@@ -37,6 +37,7 @@ set(SOURCES
     gamedialog.cpp
     cpugamer.cpp
     tripletreenode.cpp
+    treenode.cpp
 )
 
 set(UI_SOURCES
