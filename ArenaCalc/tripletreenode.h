@@ -3,8 +3,9 @@
 
 #include "treenode.h"
 
-class TripleTreeNode : public BaseTreeNode<3>
-{
+class TripleTreeNode : public BaseTreeNode<3> {
+public:
+
 };
 
 #endif // TRIPLETREENODE_H

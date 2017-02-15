@@ -7,13 +7,14 @@
 class TreeNode
 {
 public:
+    using WeightType = int;
+    using WeightDiffType = int;
+
     TreeNode() {}
     TreeNode(const TreeNode &) = delete;
     TreeNode &operator=(const TreeNode &) = delete;
     virtual ~TreeNode();
 
-    using WeightType = int;
-    using WeightDiffType = int;
     WeightType weight() const { return _weight; }
     void addToWeight(WeightDiffType diff);
 

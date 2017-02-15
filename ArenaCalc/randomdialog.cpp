@@ -2,6 +2,7 @@
 #include "ui_randomdialog.h"
 
 #include "randomholder.h"
+#include "enums.h"
 #include "enumclassutil.h"
 #include <array>
 #include <QSettings>

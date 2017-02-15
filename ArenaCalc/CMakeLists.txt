@@ -38,6 +38,7 @@ set(SOURCES
     cpugamer.cpp
     tripletreenode.cpp
     treenode.cpp
+    enums.h
 )
 
 set(UI_SOURCES
