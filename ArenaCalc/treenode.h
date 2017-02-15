@@ -4,7 +4,7 @@
 #include <array>
 #include <memory>
 
-class TreeNode
+class TreeNode : public std::enable_shared_from_this<TreeNode>
 {
 public:
     using WeightType = int;
