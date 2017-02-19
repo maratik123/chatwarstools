@@ -20,8 +20,8 @@ public:
 
 protected:
     void putChild(std::size_t index, std::unique_ptr<TreeNode> newChild);
-    virtual std::weak_ptr<TreeNode> child(std::size_t index) const = 0;
-    virtual std::shared_ptr<TreeNode> &child(std::size_t index) = 0;
+    virtual std::shared_ptr<TreeNode> &childPtrRef(std::size_t index) = 0;
+    std::shared_ptr<TreeNode> childPtr(std::size_t index) { return childPtrRef(index); }
 
 private:
     void updateParentWeight(WeightDiffType diff);
@@ -33,10 +33,11 @@ template <std::size_t TotalNodes>
 class BaseTreeNode : public TreeNode
 {
 protected:
-    std::shared_ptr<TreeNode> &child(std::size_t index) { return _children[index]; }
-    std::weak_ptr<TreeNode> child(std::size_t index) const { return _children[index]; }
+    template <typename DerivedType>
+    std::shared_ptr<DerivedType> childPtrDerived(std::size_t index) { return std::static_pointer_cast<DerivedType>(childPtr(index)); }
 
 private:
+    std::shared_ptr<TreeNode> &childPtrRef(std::size_t index) { return _children[index]; }
     std::array<std::shared_ptr<TreeNode>, TotalNodes> _children;
 };
 

@@ -4,6 +4,12 @@
 #include <cstddef>
 
 template <typename T>
+inline constexpr std::size_t enumToIndex(T t)
+{
+    return static_cast<std::size_t>(t);
+}
+
+template <typename T>
 inline constexpr int enumToId(T t)
 {
     return static_cast<int>(t);

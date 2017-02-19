@@ -23,5 +23,5 @@ void TreeNode::putChild(std::size_t index, std::unique_ptr<TreeNode> newChild)
     TreeNode &childNode = *newChild;
     updateParentWeight(childNode.weight());
     childNode._parent = shared_from_this();
-    child(index) = std::shared_ptr<TreeNode>(std::move(newChild));
+    childPtrRef(index) = std::shared_ptr<TreeNode>(std::move(newChild));
 }
